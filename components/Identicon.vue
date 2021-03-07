@@ -2,7 +2,6 @@
   <div v-html="svgHtml" />
 </template>
 
-
 <script>
 import * as jdenticon from "jdenticon";
 import { isHex, isU8a, u8aToHex } from "@polkadot/util";

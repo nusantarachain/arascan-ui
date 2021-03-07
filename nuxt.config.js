@@ -6,12 +6,12 @@ export default {
   target: 'static',
 
   env: {
-      
+      WS_API_URL: process.env.WS_API_URL || 'ws://localhost:8080'
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Arascan',
+    title: 'ARAScan',
     htmlAttrs: {
       lang: 'en'
     },
@@ -39,7 +39,8 @@ export default {
   plugins: [
     '@/plugins/framevuerk',
     '~/plugins/axios.js',
-    '~/plugins/util.js'
+    '~/plugins/util.js',
+    '~/plugins/ws.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

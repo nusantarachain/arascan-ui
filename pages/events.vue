@@ -1,7 +1,5 @@
 <template>
-  <fvTable :fields="fields" :rows="rows" class="events">
-      
-  </fvTable>
+  <fvTable :fields="fields" :rows="rows" class="events"></fvTable>
 </template>
 
 <script>

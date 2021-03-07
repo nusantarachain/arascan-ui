@@ -42,17 +42,38 @@ body .material-icons {
   vertical-align: middle;
 }
 
-.content {
-  /* margin: 0 auto; */
-  /* max-width: 1024px; */
-}
-
 .hash {
     font-family: consolas, menlo, monaco, monospace;
 }
 
-a.address {
+.address {
     color: rgb(29, 90, 195) !important;
     font-family: consolas, menlo, monaco, monospace;
+}
+
+.mono-font {
+    font-family: consolas, menlo, monaco, monospace;
+}
+
+a.link {
+    color: rgb(29, 90, 195) !important;
+}
+
+.divider {
+  flex-grow: 1;
+  border-bottom: 1px solid rgb(213, 213, 213);
+  margin: 5px;
+  margin-bottom: 20px;
+}
+
+.radius {
+    border-radius: 4px!important;
+}
+.border {
+    border: 1px solid #e0e0e0!important;
+}
+.shadow {
+    -webkit-box-shadow: 0 3px 3px rgba(0,0,0,.05)!important;
+    box-shadow: 0 3px 3px rgba(0,0,0,.05)!important;
 }
 </style>

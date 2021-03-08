@@ -43,6 +43,6 @@
     "ts-jest": "^26.4.4",
     "uglifyjs-webpack-plugin": "^2.1.1",
     "vue-jest": "^3.0.4",
-    "webpack": "^5.24.3"
+    "webpack": "^5.24.4"
   }
 }

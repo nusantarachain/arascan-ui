@@ -1,5 +1,7 @@
 # Arascan
 
+This is UI frontend for [Arascan](https://scan.nuchain.network).
+
 ## Build Setup
 
 ```bash
@@ -17,4 +19,12 @@ $ yarn start
 $ yarn generate
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+Build with custom configuration:
+
+```bash
+$ cp .env-example .env
+
+# Edit .env as you wish
+
+$ ./build.sh
+```

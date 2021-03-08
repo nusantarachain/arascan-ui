@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="fv-row">
-      <div class="fv-col-2"  v-if="data != null">
+      <div class="fv-col-md-2 fv-col-sm-12"  v-if="data != null">
         <div>Block number:</div>
         <h2 v-if="data['_id'] != 0">#{{ data['_id'] }}</h2>
       </div>
       <div class="fv-col-9" v-if="data == null">
           Cannot load block data :(
       </div>
-      <div class="fv-col-9" v-if="data != null">
+      <div class="fv-col-md-9 fv-col-sm-12" v-if="data != null">
         <div>Hash:</div>
         <strong class="hash">{{ data["block_hash"] }}</strong>
 
@@ -16,6 +16,11 @@
         <strong class="hash">
             <NuxtLink class="link" :to="`/block/${data['block_parent_hash']}`">{{ data["block_parent_hash"] }}</NuxtLink>
         </strong>
+
+        <div>Timestamp:</div>
+        <div>
+            {{timestamp}}
+        </div>
 
         <div class="divider" />
 
@@ -48,11 +53,11 @@
 </template>
 
 <script>
-import Identicon from "~/components/Identicon";
-import Time from "~/components/Time";
+// import Identicon from "~/components/Identicon";
+// import Time from "~/components/Time";
 
 export default {
-  components: [Identicon, Time],
+//   components: [Identicon, Time],
   data() {
     return {
       num_or_hash: this.$route.params.num_or_hash,
@@ -62,12 +67,23 @@ export default {
           block_parent_hash: '-',
           extrinsics: []
       },
+      timestamp: '-'
     };
+  },
+  mounted(){
+      if (this.num_or_hash.length == 48){
+          // handle account address
+          this.$router.push(`/account/${this.num_or_hash}`);
+      }
   },
   async fetch() {
     this.$axios.$get(`/block/${this.num_or_hash}`).then((d) => {
-        console.log(d);
+        // console.log(d);
       this.data = d.result;
+      const extr = this.data.extrinsics.find(d => d.method.callIndex == "0x0300");
+      if (extr){
+          this.timestamp = this.$moment(extr.method.args.now);
+      }
     });
   },
 };

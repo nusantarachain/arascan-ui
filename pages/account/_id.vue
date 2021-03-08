@@ -2,17 +2,27 @@
   <div>
     <div class="fv-row">
       <div class="fv-col-sm-2 fv-col-md-2">
-        <Identicon :address="address" :size="128" class="fv-hidden-sm fv-hidden-md" />
-        <Identicon :address="address" :size="64" class="fv-hidden-lg fv-hidden-xl" />
+        <Identicon
+          :address="address"
+          :size="128"
+          class="fv-hidden-xs fv-hidden-sm fv-hidden-md"
+        />
+        <Identicon
+          :address="address"
+          :size="64"
+          class="fv-hidden-lg fv-hidden-xl"
+        />
       </div>
       <div class="fv-col-sm-10 fv-col-md-10 fv-padding">
         <div>Address:</div>
-        <strong class="address fv-hidden-sm">{{ this.$route.params.id }}</strong>
-        <strong class="address-sm fv-hidden-md fv-hidden-lg fv-hidden-xl">{{ this.$route.params.id }}</strong>
+        <strong class="address fv-hidden-xs fv-hidden-sm">{{ address }}</strong>
+        <strong class="address-sm fv-hidden-md fv-hidden-lg fv-hidden-xl">{{
+          address
+        }}</strong>
 
         <div class="balance">
           <div>Balance:</div>
-          <strong>{{ balance }}</strong>
+          <strong>{{ balance }}</strong> ARA
         </div>
       </div>
     </div>
@@ -45,7 +55,40 @@
 
     <!-- TRANSACTION TRANSFERS --->
 
-    <div class="fv-row">
+    <div class="fv-row fv-hidden-lg fv-hidden-xl">
+      <div class="fv-col-md-2 fv-hidden-sm"></div>
+      <div class="fv-col-md-10 fv-col-sm-12">
+        <h3>Transactions:</h3>
+
+        <fvList parent>
+          <fvListItem v-for="tr in transfers" v-bind:key="tr._id">
+              
+              <div class="fv-row">
+                    <div class="fv-col-6">
+                    <NuxtLink class="address" :to="'/block/' + tr.block">#{{ tr.block }}</NuxtLink>
+                    </div>
+                    <div class="fv-col-6">
+                        <i :class="'material-icons ' + tr.trf_type">{{tr.trf_icon}}</i>
+                            {{ tr.trf_type }}
+                    </div>
+              </div>
+
+              <div class="fv-row">
+                                      <div class="fv-col-6">
+                        <NuxtLink class="address" :to="`/account/${tr.subaddr}`">{{tr.sortaddr}}</NuxtLink>
+                    </div>
+                    <div class="fv-col-6">
+                        <strong>{{tr.amount}}</strong> ARA
+                    </div>
+              </div>
+
+          </fvListItem>
+        </fvList>
+
+      </div>
+    </div>
+
+    <div class="fv-row fv-hidden-xs fv-hidden-sm fv-hidden-md">
       <div class="fv-col-md-2 fv-hidden-sm"></div>
       <div class="fv-col-md-10 fv-col-sm-12">
         <h3>Transactions:</h3>
@@ -65,17 +108,13 @@
               <tbody>
                 <tr v-for="tr in transfers" v-bind:key="tr._id">
                   <td>
-                    <NuxtLink :to="'/block/' + tr.block"
-                      >#{{ tr.block }}</NuxtLink
-                    >
+                    <NuxtLink :to="'/block/' + tr.block">#{{ tr.block }}</NuxtLink>
                   </td>
                   <td>
                     <Time :ts="tr.ts" />
                   </td>
                   <td>
-                    <i :class="'material-icons ' + tr.trf_type">{{
-                      tr.trf_icon
-                    }}</i>
+                    <i :class="'material-icons ' + tr.trf_type">{{tr.trf_icon}}</i>
                     {{ tr.trf_type }}
                   </td>
                   <td>
@@ -83,7 +122,7 @@
                       tr.subaddr
                     }}</NuxtLink>
                   </td>
-                  <td>{{ tr.amount }}</td>
+                  <td><strong>{{ tr.amount }}</strong> ARA</td>
                 </tr>
               </tbody>
             </table>
@@ -95,11 +134,11 @@
 </template>
 
 <script>
-import Identicon from "~/components/Identicon";
-import Time from "~/components/Time";
+// import Identicon from "~/components/Identicon";
+// import Time from "~/components/Time";
 
 export default {
-  components: [Identicon, Time],
+//   components: [Identicon, Time],
   data() {
     return {
       address: this.$route.params.id,
@@ -117,6 +156,7 @@ export default {
           d["src"] == this.address ? "call_made" : "call_received";
         d["trf_type"] = d["src"] == this.address ? "to" : "from";
         d["subaddr"] = d["src"] == this.address ? d["dst"] : d["src"];
+        d['sortaddr'] = this.$util.addrShort(d.subaddr);
         d["amount"] = this.$util.formatBalance(d["amount"]);
         return d;
       });

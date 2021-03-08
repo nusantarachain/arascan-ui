@@ -46,8 +46,10 @@ body .material-icons {
     font-family: consolas, menlo, monaco, monospace;
 }
 
-.address {
+a.address {
     color: rgb(29, 90, 195) !important;
+}
+.address {
     font-family: consolas, menlo, monaco, monospace;
 }
 

@@ -2,7 +2,7 @@
   <div>
     <div class="content">
       <div class="fv-row">
-        <div class="fv-col-md-2 fv-col-sm-6">
+        <div class="fv-col-lg-2 fv-col-md-4 fv-col-sm-6">
           <div
             class="fv-border shadow radius fv-margin-top fv-margin-bottom fv-padding notes"
           >
@@ -11,7 +11,7 @@
           </div>
         </div>
 
-        <div class="fv-col-md-2 fv-col-sm-6">
+        <div class="fv-col-lg-2 fv-col-md-4 fv-col-sm-6">
           <div
             class="fv-border shadow radius fv-margin-top fv-margin-bottom fv-padding notes"
           >
@@ -41,7 +41,7 @@
             <div class="finalized num">{{ validators.length }}</div>
           </div>
         </div>
-        <div class="fv-col-2 fv-hidden-sm">
+        <div class="fv-col-md-2 fv-hidden-xs fv-hidden-sm fv-hidden-md">
           <div
             class="fv-border shadow radius fv-margin-top fv-margin-bottom fv-padding notes"
           >
@@ -49,7 +49,7 @@
             <div class="finalized num">{{ session }}</div>
           </div>
         </div>
-        <div class="fv-col-md-2 fv-col-sm-6 fv-hidden-sm">
+        <div class="fv-col-md-2 fv-hidden-xs fv-hidden-sm fv-hidden-md">
           <div
             class="fv-border shadow radius fv-margin-top fv-margin-bottom fv-padding notes"
           >
@@ -60,12 +60,12 @@
       </div>
     </div>
     <div class="fv-row">
-      <div class="fv-col-6">
+      <div class="fv-col-lg-6 fv-col-md-12">
         <h3>Blocks:</h3>
         <Blocks />
       </div>
 
-      <div class="fv-col-6">
+      <div class="fv-col-lg-6 fv-col-md-12">
         <h3>Events:</h3>
         <Events />
       </div>

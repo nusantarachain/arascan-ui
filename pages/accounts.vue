@@ -1,4 +1,5 @@
 <template>
+    <div>
   <fvTable id="Accounts" :fields="fields" :rows="rows" class="accounts">
       <template v-slot:field="{field, row}">
           <!-- <div v-for="row in rows" v-bind:key="row['Address']"> -->
@@ -7,9 +8,14 @@
                     <Identicon :address="row['Address']" :size="50" />
                 </span>
                 <span v-if="field=='Address'">
-                    <NuxtLink class="address" :to="`/account/${row[field]}`">{{row[field]}}</NuxtLink>
+                    <NuxtLink class="address fv-hidden-sm fv-hidden-xs fv-hidden-md" :to="`/account/${row[field]}`">{{row[field]}}</NuxtLink>
+                    <NuxtLink class="address fv-hidden-lg fv-hidden-xl" :to="`/account/${row[field]}`">
+                        {{row[field + '_short']}}
+                    </NuxtLink>
                 </span>
-                <span v-if="field=='Balance'">{{row[field]}}</span>
+                <span v-if="field=='Balance'">
+                    {{row[field]}} ARA
+                </span>
                 <div class="time" v-if="field=='Created At'">
                     <Time :ts="row['ts']" />
                 </div>
@@ -17,33 +23,34 @@
           <!-- </div> -->
       </template>
   </fvTable>
+    </div>
 </template>
 
 <script>
-import Time from "~/components/Time";
 export default {
-  components: {Time},
   data() {
     return {
       sidebar: false,
       docsMenu: false,
       fields: ["Identicon","Address", "Balance", "Created At"],
       rows: [],
+      data: "--"
     };
   },
   async fetch() {
     this.$axios.$get("/accounts").then(async (d) => {
     //   console.log(d);
+        // this.data = d;
       this.rows = d.entries.map(
-        ({ _id, balance, created_at_block, created_ts }) => {
+        ({ _id, balance, created_ts }) => {
           return {
             Address: _id,
+            Address_short: this.$util.addrShort(_id),
             Balance: this.$util.formatBalance(balance.free),
             ts: created_ts
           };
         }
       );
-      //   this.rows = [{'Address':'satu', 'Balance':0, 'Created At': 2}];
     });
   },
   methods: {},

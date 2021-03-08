@@ -2,9 +2,7 @@
   <fvTable :fields="fields" :rows="rows" class="events">
     <template v-slot:field="{ field, row }">
       <span v-if="field == 'block'">
-        <NuxtLink class="link" :to="`/block/${row[field]}`">{{
-          row[field]
-        }}</NuxtLink>
+        <NuxtLink class="link" :to="`/block/${row[field]}`">#{{row[field]}}</NuxtLink>
       </span>
       <span v-if="field != 'block'">
           {{row[field]}}

@@ -1,15 +1,14 @@
 <template>
   <fvTable
-    :fields="['Number', 'Hash', 'Validator']"
+    :fields="['Number', 'Hash']"
     :rows="blocks"
     class="blocks"
   >
     <template v-slot:field="{ field, row }">
       <div v-if="field == 'Number'">
-          <NuxtLink class="link" :to="`/block/${row['_id']}`">{{row['_id']}}</NuxtLink>
+          <NuxtLink class="link" :to="`/block/${row['_id']}`">#{{row['_id']}}</NuxtLink>
       </div>
       <div v-if="field == 'Hash'" class="hash">{{ row["block_hash"] }}</div>
-      <div v-if="field == 'Validator'">-</div>
     </template>
   </fvTable>
 </template>

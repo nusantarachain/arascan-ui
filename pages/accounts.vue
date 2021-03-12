@@ -50,7 +50,7 @@ export default {
             ts: created_ts
           };
         }
-      );
+      ).filter((a) => a.ts != null && a.ts  > 0);
     });
   },
   methods: {},

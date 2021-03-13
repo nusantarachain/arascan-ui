@@ -40,11 +40,23 @@
               <tbody>
                 <tr>
                   <td>Name</td>
-                  <td>-</td>
+                  <td>:</td>
+                  <td v-if="identity">{{identity.legal}} ({{identity.display}})</td>
+                  <td v-if="identity == null">-</td>
                 </tr>
                 <tr>
                   <td>Email</td>
-                  <td>-</td>
+                  <td>:</td>
+                  <td v-if="identity">{{identity.email}}</td>
+                  <td v-if="identity == null">-</td>
+                </tr>
+                <tr>
+                  <td>Twitter</td>
+                  <td>:</td>
+                  <td v-if="identity && identity.twitter">
+                    <a class="link" target="_blank" :href="'https://www.twitter.com/' + identity.twitter_link">{{identity.twitter}}</a>
+                  </td>
+                  <td v-if="identity == null">-</td>
                 </tr>
               </tbody>
             </table>
@@ -74,7 +86,7 @@
               </div>
 
               <div class="fv-row">
-                                      <div class="fv-col-6">
+                    <div class="fv-col-6">
                         <NuxtLink class="address" :to="`/account/${tr.subaddr}`">{{tr.sortaddr}}</NuxtLink>
                     </div>
                     <div class="fv-col-6">
@@ -94,7 +106,7 @@
         <h3>Transactions:</h3>
 
         <div class="fv-padding">
-          <div id="Transaction" class="fv-table title identity fv-padding">
+          <div id="Transaction" class="fv-table title fv-padding">
             <table>
               <thead>
                 <tr>
@@ -108,7 +120,7 @@
               <tbody>
                 <tr v-for="tr in transfers" v-bind:key="tr._id">
                   <td>
-                    <NuxtLink :to="'/block/' + tr.block">#{{ tr.block }}</NuxtLink>
+                    <NuxtLink class="link" :to="'/block/' + tr.block">#{{ tr.block }}</NuxtLink>
                   </td>
                   <td>
                     <Time :ts="tr.ts" />
@@ -143,12 +155,17 @@ export default {
     return {
       address: this.$route.params.id,
       balance: "0",
+      identity: {},
       transfers: [],
     };
   },
   async fetch() {
     this.$axios.$get(`/account/${this.address}`).then((d) => {
       this.balance = this.$util.formatBalance(d.result.balance.free);
+      this.identity = d.result.identity;
+      if (this.identity['twitter']){
+        this.identity['twitter_link'] = this.identity['twitter'].substring(1);
+      }
     });
     this.$axios.$get(`/account/${this.address}/transfers`).then((d) => {
       this.transfers = d.entries.map((d) => {
@@ -171,6 +188,15 @@ strong.address {
 }
 strong.address-sm {
   font-size: 0.8em;
+}
+.identity > table > tbody > tr > td:nth-child(1),
+.identity > table > tbody > tr > td:nth-child(2),
+.identity > table > tbody > tr > td:nth-child(3)
+ {
+  text-align: left !important;
+}
+.identity > table > tbody > tr > td:nth-child(2) {
+  width: 10px;
 }
 #Transaction > table > thead > tr > th:nth-child(1),
 #Transaction > table > thead > tr > th:nth-child(2),

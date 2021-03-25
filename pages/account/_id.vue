@@ -53,7 +53,7 @@
                 <tr>
                   <td>Website</td>
                   <td>:</td>
-                  <td v-if="identity && identity.web">{{identity.web}}</td>
+                  <td v-if="identity && identity.web"><a class="link" target="_blank" :href="identity.web">{{identity.web}}</a></td>
                   <td v-if="identity == null || identity.web == null">-</td>
                 </tr>
                 <tr>

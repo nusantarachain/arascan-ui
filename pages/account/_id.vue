@@ -47,8 +47,14 @@
                 <tr>
                   <td>Email</td>
                   <td>:</td>
-                  <td v-if="identity">{{identity.email}}</td>
+                  <td v-if="identity">{{identity.email ? identity.email : "-"}}</td>
                   <td v-if="identity == null">-</td>
+                </tr>
+                <tr>
+                  <td>Website</td>
+                  <td>:</td>
+                  <td v-if="identity && identity.web">{{identity.web}}</td>
+                  <td v-if="identity == null || identity.web == null">-</td>
                 </tr>
                 <tr>
                   <td>Twitter</td>
@@ -56,7 +62,7 @@
                   <td v-if="identity && identity.twitter">
                     <a class="link" target="_blank" :href="'https://www.twitter.com/' + identity.twitter_link">{{identity.twitter}}</a>
                   </td>
-                  <td v-if="identity == null">-</td>
+                  <td v-if="identity == null || identity.twitter == null">-</td>
                 </tr>
               </tbody>
             </table>

@@ -6,7 +6,8 @@ export default {
   target: 'static',
 
   env: {
-      WS_API_URL: process.env.WS_API_URL || 'ws://localhost:8080'
+      WS_API_URL: process.env.WS_API_URL || 'ws://localhost:8080',
+      NUCHAIN_WS_ENDPOINT: process.env.NUCHAIN_WS_ENDPOINT || 'wss://node-sg.nuchain.riset.tech'
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -40,7 +41,8 @@ export default {
     '@/plugins/framevuerk',
     '~/plugins/axios.js',
     '~/plugins/util.js',
-    '~/plugins/ws.js'
+    '~/plugins/ws.js',
+    '~/plugins/nuchain.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

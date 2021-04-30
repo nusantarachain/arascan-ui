@@ -62,7 +62,7 @@
                   <td v-if="identity && identity.twitter">
                     <a class="link" target="_blank" :href="'https://www.twitter.com/' + identity.twitter_link">{{identity.twitter}}</a>
                   </td>
-                  <td v-if="identity == null || identity.twitter == null">-</td>
+                  <td v-if="!identity || !identity.twitter">-</td>
                 </tr>
               </tbody>
             </table>
@@ -155,6 +155,8 @@
 // import Identicon from "~/components/Identicon";
 // import Time from "~/components/Time";
 
+import { ApiPromise, WsProvider } from "@polkadot/api";
+
 export default {
 //   components: [Identicon, Time],
   data() {
@@ -167,11 +169,15 @@ export default {
   },
   async fetch() {
     this.$axios.$get(`/account/${this.address}`).then((d) => {
+      if (!d.result.balance){
+        return;
+      }
       this.balance = this.$util.formatBalance(d.result.balance.free);
       this.identity = d.result.identity;
-      if (this.identity['twitter']){
+      if (this.identity && this.identity['twitter']){
         this.identity['twitter_link'] = this.identity['twitter'].substring(1);
       }
+      this.fetchFromChain(this.address);
     });
     this.$axios.$get(`/account/${this.address}/transfers`).then((d) => {
       this.transfers = d.entries.map((d) => {
@@ -185,6 +191,15 @@ export default {
       });
     });
   },
+  methods: {
+    fetchFromChain(address) {
+      
+      this.$nuchain.api.query.system.account(address).then((account) => {
+        this.balance = this.$util.formatBalance(account.data.free);
+      });
+
+    }
+  }
 };
 </script>
 

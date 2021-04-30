@@ -19,10 +19,10 @@ $ yarn start
 $ yarn generate
 ```
 
-Build with custom configuration:
+Build with prod configuration:
 
 ```bash
-$ cp .env-example .env
+$ cp .env-example .env-prod
 
 # Edit .env as you wish
 

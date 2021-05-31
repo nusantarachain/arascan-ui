@@ -20,7 +20,7 @@
     "framevuerk": "^2.4.2",
     "jdenticon": "^3.1.0",
     "nuxt": "^2.15.3",
-    "ws": "^7.4.4"
+    "ws": "^7.4.6"
   },
   "devDependencies": {
     "@nuxt/types": "^2.15.3",

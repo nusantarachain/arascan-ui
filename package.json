@@ -16,7 +16,7 @@
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.1.0",
     "@nuxtjs/axios": "^5.13.1",
-    "core-js": "^3.16.2",
+    "core-js": "^3.18.2",
     "framevuerk": "^2.4.2",
     "jdenticon": "^3.1.1",
     "nuxt": "^2.15.3",
@@ -34,7 +34,7 @@
     "@polkadot/util-crypto": "^6.0.5",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.1.0",
-    "babel-jest": "^26.6.3",
+    "babel-jest": "^27.2.4",
     "eslint": "^7.22.0",
     "eslint-plugin-nuxt": "^2.0.0",
     "eslint-plugin-vue": "^7.11.1",

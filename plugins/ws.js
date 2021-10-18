@@ -7,15 +7,18 @@ export default ({ app }, inject) => {
     console.log("got ws message from server: " + msgEvent.data);
     const jd = JSON.parse(msgEvent.data);
     if (jd != null) {
-      if ($nuxt) {
+      if (window.$nuxt){
         if (jd.type == "stats") {
-          $nuxt.$root.$emit("stats-update", jd);
+          window.$nuxt.$root.$emit("stats-update", jd);
         } else {
-          $nuxt.$root.$emit(jd.type, jd);
+          window.$nuxt.$root.$emit(jd.type, jd);
         }
       }
     }
   };
+//   window.onNuxtReady((app) => {
+//     // your have access to `window.$nuxt.$root` here
+// })
   function waitForConnection(callback, interval) {
     if (wsc.readyState === 1) {
       callback();

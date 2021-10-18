@@ -38,7 +38,7 @@
             class="fv-border shadow radius fv-margin-top fv-margin-bottom fv-padding notes"
           >
             <div>Validators:</div>
-            <div class="finalized num">{{ validators.length }}</div>
+            <div class="finalized num">{{ validators ? validators.length : '-' }}</div>
           </div>
         </div>
         <div class="fv-col-md-2 fv-hidden-xs fv-hidden-sm fv-hidden-md">

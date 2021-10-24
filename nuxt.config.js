@@ -69,5 +69,10 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+  },
+
+  publicRuntimeConfig: {
+    wsApiUrl: process.env.WS_API_URL || 'ws://localhost:8080',
+    nuchainWsEndpoint: process.env.NUCHAIN_WS_ENDPOINT || 'wss://node-sg.nuchain.riset.tech'
+  },
 }

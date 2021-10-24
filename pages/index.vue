@@ -7,7 +7,7 @@
             class="fv-border shadow radius fv-margin-top fv-margin-bottom fv-padding notes"
           >
             <div>Finalized:</div>
-            <div class="finalized num">{{ finalizedBlocks }}</div>
+            <div class="finalized num">{{ finalizedBlocks ? finalizedBlocks : '-' }}</div>
           </div>
         </div>
 
@@ -95,10 +95,16 @@ export default {
   mounted() {
     //   console.log("mounted");
     // this.$ws.send("hello there");
-    this.$root.$on("stats-update", (d)=>{
+    this.$ws.socket.on("stats-update", (d)=>{
         console.log("stats updated");
         // console.log(d);
         this.updateStatsData(d.data);
+    });
+
+    this.$ws.socket.on("new_block", (message) => {
+      // console.log("🚀 ~ file: Blocks.vue ~ line 23 ~ this.$ws.socket.on ~ message", message)
+      const { data: {finalized} } = JSON.parse(message);
+      this.finalizedBlocks = finalized.number;
     });
   },
   methods: {

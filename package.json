@@ -19,7 +19,7 @@
     "core-js": "^3.16.2",
     "framevuerk": "^2.4.2",
     "jdenticon": "^3.1.1",
-    "nuxt": "^2.15.3",
+    "nuxt": "^2.15.8",
     "socket.io-client": "^4.3.2",
     "ws": "^8.2.1"
   },

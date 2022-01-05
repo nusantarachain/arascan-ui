@@ -1,3 +1,6 @@
+> This repo is deprecated, already included in https://github.com/nusantarachain/arascan
+> 
+
 # Arascan
 
 This is UI frontend for [Arascan](https://scan.nuchain.network).
